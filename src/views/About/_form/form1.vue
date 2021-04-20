@@ -161,7 +161,7 @@ export default {
       this.$router.go(-1);
     },
     next() {
-      this.$router.push({ name: "upload", params: { data: this.formData } });
+      this.$router.push({ name: "upload", params: { id: 1, data: this.formData } });
     },
     resetForm() {
       this.formData = {};

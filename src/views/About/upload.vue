@@ -62,7 +62,7 @@ export default {
     next() {
       alert("commit" + this.formData);
       this.resultvisible = true
-      this.$axios.post('/',this.$route.params.data).then(res => {
+      this.$axios.post(`/${this.$route.params.id}`,this.$route.params.data).then(res => {
         console.log(res)
       })
     },

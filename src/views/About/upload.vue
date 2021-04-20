@@ -20,7 +20,7 @@
           {{ "模型类型：" + type[$route.params.id] }}
         </div>
         <div class="text item" v-if="resultvisible">
-          {{ "返回结果：" }}
+          {{ "返回结果：" + result }}
         </div>
       </el-card>
     </div>
@@ -29,9 +29,8 @@
       v-if="!isForm"
       class="upload-demo"
       drag
-      action="http://localhost:5050/uploadfile"
+      :action="url"
       :show-file-list="false"
-      v-loading="loading"
       :on-success="uploadSuccess"
     >
       <i class="el-icon-upload"></i>
@@ -61,11 +60,13 @@ export default {
       resultvisible: false,
       isForm: true,
       loading: false,
+      url:`http://localhost:5050/uploadfile/${this.$route.params.id}`,
       type: {
         1: "数据包",
         2: "文档",
         3: "API",
       },
+      result,
     };
   },
 
@@ -86,11 +87,13 @@ export default {
         .post(`http://localhost:5050/${this.$route.params.id}`, this.$route.params.data)
         .then((res) => {
           console.log(res);
+          this.result = res[0]
           this.loading = false;
         });
     },
-    uploadSuccess() {
-      console.log("uploadsuccess")
+    uploadSuccess(res,file,fileList) {
+      this.result = res.slice(2,-2)
+      this.isForm = true;
     }
   },
 };

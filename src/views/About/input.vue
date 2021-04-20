@@ -8,7 +8,7 @@
     >
       <el-step title="步骤 1" description="选择模型"></el-step>
       <el-step title="步骤 2" description="输入数据"></el-step>
-      <el-step title="步骤 3" description="等待结果"></el-step>
+      <el-step title="步骤 3" description="提交数据"></el-step>
     </el-steps>
 
     <router-view></router-view>

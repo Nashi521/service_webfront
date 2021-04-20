@@ -40,10 +40,16 @@
         <el-checkbox label="投融资" v-model="formData.tag31"></el-checkbox>
         <el-checkbox label="黑名单" v-model="formData.tag32"></el-checkbox>
         <el-checkbox label="风控" v-model="formData.tag33"></el-checkbox>
-        <el-checkbox label="手机号码归属" v-model="formData.tag34"></el-checkbox>
+        <el-checkbox
+          label="手机号码归属"
+          v-model="formData.tag34"
+        ></el-checkbox>
         <el-checkbox label="反欺诈" v-model="formData.tag35"></el-checkbox>
         <el-checkbox label="星座运势" v-model="formData.tag36"></el-checkbox>
-        <el-checkbox label="手机号码状态" v-model="formData.tag37"></el-checkbox>
+        <el-checkbox
+          label="手机号码状态"
+          v-model="formData.tag37"
+        ></el-checkbox>
         <el-checkbox label="航空航班" v-model="formData.tag38"></el-checkbox>
         <el-checkbox label="新闻资讯" v-model="formData.tag39"></el-checkbox>
         <el-checkbox label="环境质量" v-model="formData.tag40"></el-checkbox>
@@ -54,7 +60,10 @@
         <el-checkbox label="基站" v-model="formData.tag45"></el-checkbox>
         <el-checkbox label="自然灾害" v-model="formData.tag46"></el-checkbox>
         <el-checkbox label="万年历" v-model="formData.tag47"></el-checkbox>
-        <el-checkbox label="手机在网时长" v-model="formData.tag48"></el-checkbox>
+        <el-checkbox
+          label="手机在网时长"
+          v-model="formData.tag48"
+        ></el-checkbox>
         <el-checkbox label="企业图谱" v-model="formData.tag49"></el-checkbox>
         <el-checkbox label="智能营销" v-model="formData.tag50"></el-checkbox>
         <el-checkbox label="油价查询" v-model="formData.tag51"></el-checkbox>
@@ -76,6 +85,8 @@
         </el-button>
         <el-button @click="resetForm('formData')">重置</el-button>
         <el-button type="primary" @click="next">下一步</el-button>
+        <el-divider direction="vertical"></el-divider>
+        <el-button type="primary" @click="nexts">批量导入</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -95,7 +106,16 @@ export default {
       this.$router.go(-1);
     },
     next() {
-      this.$router.push({ name: "upload", params: { id: 3, data:this.formData } });
+      this.$router.push({
+        name: "upload",
+        params: { id: 3, data: this.formData },
+      });
+    },
+    nexts() {
+      this.$router.push({
+        name: "upload",
+        params: { id: 3 },
+      });
     },
     resetForm() {
       this.formData = {};

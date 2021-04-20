@@ -8,7 +8,7 @@
     >
       <el-step title="步骤 1" description="选择模型"></el-step>
       <el-step title="步骤 2" description="输入数据"></el-step>
-      <el-step title="步骤 3" description="等待结果"></el-step>
+      <el-step title="步骤 3" description="提交结果"></el-step>
     </el-steps>
 
     <el-radio-group v-model="type">
@@ -16,7 +16,7 @@
         数据包价格预测
         <p>适用范围：</p>
         <p>如 省级市级行政区划线、</p>
-        <p> xx年平均降水量 等</p>
+        <p>xx年平均降水量 等</p>
       </el-radio>
       <el-radio label="2" border class="tpype-content">
         文档价格预测
@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     next() {
-      this.$router.push({ path: `/about/input/${ this.type }` });
+      this.$router.push({ path: `/about/input/${this.type}` });
     },
   },
 };

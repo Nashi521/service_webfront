@@ -8,7 +8,7 @@
       style="width: 60%; margin: auto;"
     >
       <el-form-item label="数据大小" prop="size" style="width: 60%">
-        <el-input v-model.number="formData.size">
+        <el-input v-model.number="formData.size" placeholder="请输入数据大小">
           <template slot="suffix">kb</template>
         </el-input>
       </el-form-item>
@@ -16,7 +16,7 @@
         <el-select v-model="formData.type" placeholder="请选择">
           <el-option
             v-for="item in type_options"
-            :key="item.value"
+            :key="item.label"
             :label="item.label"
             :value="item.value"
           >
@@ -27,7 +27,7 @@
         <el-select v-model="formData.format" placeholder="请选择">
           <el-option
             v-for="item in format_options"
-            :key="item.value"
+            :key="item.label"
             :label="item.label"
             :value="item.value"
           >
@@ -54,6 +54,8 @@
         </el-button>
         <el-button @click="resetForm('formData')">重置</el-button>
         <el-button type="primary" @click="next">下一步</el-button>
+        <el-divider direction="vertical"></el-divider>
+        <el-button type="primary" @click="nexts">批量导入</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -64,7 +66,10 @@ export default {
   data() {
     return {
       active: 2,
-      formData: {},
+      formData: {
+        type: 0,
+        format: 0,
+      },
       type_options: [
         {
           label: "文本",
@@ -111,7 +116,20 @@ export default {
       this.$router.go(-1);
     },
     next() {
-      this.$router.push({ name: "upload", params: { id: 2, data: this.formData } });
+      if (this.formData.size) {
+        this.$router.push({
+          name: "upload",
+          params: { id: 2, data: this.formData },
+        });
+      } else {
+        this.$message.error("请输入数据");
+      }
+    },
+    nexts() {
+      this.$router.push({
+        name: "upload",
+        params: { id: 2 },
+      });
     },
     resetForm() {
       this.formData = {};

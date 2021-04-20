@@ -71,4 +71,14 @@ const router = new VueRouter({
   routes
 })
 
+const allowList = ['/about/input/1', '/about/input/2', '/about/input/3'] 
+
+router.beforeEach((to, from, next) => {
+  if(to.name === 'upload' && !allowList.includes(from.path)) {
+    next({ path: '/about/index' })
+  }else{
+    next()
+  }
+})
+
 export default router

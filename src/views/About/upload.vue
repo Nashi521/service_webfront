@@ -29,7 +29,7 @@
       v-if="!isForm"
       class="upload-demo"
       drag
-      action="/uploadfile"
+      action="http://localhost:5050/uploadfile"
       :show-file-list="false"
       v-loading="loading"
       :on-success="uploadSuccess"
@@ -83,7 +83,7 @@ export default {
       this.loading = true;
       this.resultvisible = true;
       this.$axios
-        .post(`/${this.$route.params.id}`, this.$route.params.data)
+        .post(`http://localhost:5050/${this.$route.params.id}`, this.$route.params.data)
         .then((res) => {
           console.log(res);
           this.loading = false;

@@ -20,7 +20,7 @@
           {{ "模型类型：" + type[$route.params.id] }}
         </div>
         <div class="text item" v-if="resultvisible">
-          {{ "返回结果：" + result }}
+          {{ "返回结果：" + result }} {{ $route.params.id === 3? "元/次" : "元" }}
         </div>
       </el-card>
     </div>
@@ -30,7 +30,7 @@
       class="upload-demo"
       drag
       :action="url"
-      :show-file-list="false"
+      show-file-list
       :on-success="uploadSuccess"
     >
       <i class="el-icon-upload"></i>
@@ -66,7 +66,7 @@ export default {
         2: "文档",
         3: "API",
       },
-      result: null,
+      result: '',
     };
   },
 
@@ -82,18 +82,19 @@ export default {
     },
     next() {
       this.loading = true;
-      this.resultvisible = true;
       this.$axios
         .post(`http://localhost:5050/${this.$route.params.id}`, this.$route.params.data)
         .then((res) => {
-          console.log(res);
-          this.result = res.data[0]
+          this.result = parseFloat(res.data[0][0]).toFixed(2)
+          this.resultvisible = true;
           this.loading = false;
         });
     },
     uploadSuccess(res,file,fileList) {
-      this.result = res.data.slice(2,-2)
+      this.result = res.slice(1,-3)
+      console.log(this.result)
       this.isForm = true;
+      this.resultvisible = true;
     }
   },
 };
